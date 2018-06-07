@@ -1,8 +1,13 @@
-. .\config.ps1
+$ErrorActionPreference = "Stop"
+. .\build.config.ps1
 
+$JACKETT_VERSION = $env:DOCKER_APPLICATION_VERSION
 
-$imageFullName = "$repo/$($ImageName):$JACKETT_VERSION-windowsservercore"
+$imageFullName = ("{0}/{1}:{2}-windowsservercore" -f $env:DOCKER_REPO, $env:DOCKER_IMAGE, $UNIFI_VERSION)
+$imageLatestName = ("{0}/{1}:latest" -f $env:DOCKER_REPO, $env:DOCKER_IMAGE)
+
 Write-Host `Building $imageFullName`
 docker build --build-arg JACKETT_VERSION=$JACKETT_VERSION . -t $imageFullName
-Write-Host "Tagging image as latest"
-docker tag $imageFullName  "kramins/$($ImageName):latest"
+
+Write-Host "Tagging $imageLatestName"
+docker tag $imageFullName  $imageLatestName
