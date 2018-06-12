@@ -19,4 +19,4 @@ EXPOSE 9117
 VOLUME [ "C:/config" ]
 WORKDIR C:\app
 
-CMD [ "JackettConsole.exe", "--DataFolder C:/config/ --ListenPublic" ]
+CMD [ "JackettConsole.exe", "--DataFolder C:/config/ --ListenPublic --NoUpdates" ]
